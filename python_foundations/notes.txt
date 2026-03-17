@@ -1,0 +1,27 @@
+# Variables & Datatypes
+- int, float, string, bool
+- type()
+- input()
+
+# Conditions
+- if, elif, else
+- logical operators
+
+# Loops
+- for, while
+- break, continue
+
+# Functions
+- def
+- return
+- parameters
+
+# Lists
+- append, remove, loop
+
+# Tuples
+- immutable
+
+# Dictionaries
+- key-value
+- access, update
