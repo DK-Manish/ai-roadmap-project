@@ -20,7 +20,7 @@ def get_connection():
 
 class Expense(BaseModel):
     category: str
-    amount: int
+    amount: float
 
 
 # Add expense

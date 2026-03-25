@@ -14,11 +14,9 @@ def say_hello():
     return {"message": "Hello Manish"}
 
 # Path parameter -> part of URL -> /student/1 -> http://127.0.0.1:8000/student/101
-"""""
-@app.get("/students/{student_id}")
-def get_student(student_id: int):
-    return {"student_id": student_id}
-"""
+# @app.get("/students/{student_id}")
+# def get_student(student_id: int):
+#     return {"student_id": student_id}
 
 # Query Parameter -> after ? -> /search?q=test -> http://127.0.0.1:8000/search?q=manish
 @app.get("/search")
