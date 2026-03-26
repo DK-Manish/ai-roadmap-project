@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Roadmap — Study Notes</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 230px;
+      height: 100vh;
+      background: #1a1a2e;
+      border-right: 1px solid #2d2d4e;
+      padding: 1.5rem 1rem 2rem;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    nav .nav-logo {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #c4b5fd;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid #2d2d4e;
+    }
+
+    nav .phase-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      padding: 0.3rem 0.75rem;
+      margin: 0.75rem 0 0.4rem;
+      border-radius: 4px;
+    }
+
+    .phase-label.p1 { color: #6ee7b7; background: #064e3b22; }
+    .phase-label.p2 { color: #93c5fd; background: #1e3a5f22; }
+
+    nav .nav-group-title {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7c7caa;
+      padding: 0.6rem 0.75rem 0.2rem;
+    }
+
+    nav a {
+      display: block;
+      padding: 0.38rem 0.75rem 0.38rem 1.25rem;
+      margin-bottom: 0.15rem;
+      border-radius: 6px;
+      color: #a0aec0;
+      text-decoration: none;
+      font-size: 0.82rem;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    nav a:hover { background: #2d2d4e; color: #e2e8f0; }
+    nav a.active { background: #4f46e5; color: #fff; }
+
+    /* ── MAIN ── */
+    main {
+      margin-left: 230px;
+      padding: 3rem 3rem 5rem;
+      max-width: 880px;
+    }
+
+    /* ── PHASE DIVIDER ── */
+    .phase-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 4rem 0 2.5rem;
+    }
+
+    .phase-divider .phase-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .phase-badge.p1 { background: #064e3b; color: #6ee7b7; }
+    .phase-badge.p2 { background: #1e3a5f; color: #93c5fd; }
+
+    .phase-divider .phase-line {
+      flex: 1;
+      height: 1px;
+      background: #2d2d4e;
+    }
+
+    .phase-divider .phase-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #94a3b8;
+      white-space: nowrap;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%);
+      border: 1px solid #4f46e5;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      color: #c4b5fd;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+    }
+
+    .hero h1 { font-size: 2rem; color: #fff; margin-bottom: 0.5rem; }
+    .hero p  { color: rgba(255,255,255,0.7); font-size: 1rem; }
+
+    .hero .phase-pills {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .phase-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+    }
+
+    .phase-pill.done { background: #064e3b; color: #6ee7b7; }
+    .phase-pill.active { background: #1e3a5f; color: #93c5fd; }
+
+    /* ── SECTIONS ── */
+    section {
+      margin-bottom: 3.5rem;
+      scroll-margin-top: 2rem;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #7c7caa;
+      margin-bottom: 0.4rem;
+    }
+
+    h2.section-title {
+      font-size: 1.6rem;
+      color: #c4b5fd;
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #2d2d4e;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      color: #a78bfa;
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    p { margin-bottom: 0.9rem; color: #cbd5e1; }
+
+    /* ── CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1.2rem 0;
+    }
+
+    .card {
+      background: #1a1a2e;
+      border: 1px solid #2d2d4e;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    .card h4 { font-size: 0.95rem; color: #e2e8f0; margin-bottom: 0.4rem; }
+    .card p { font-size: 0.875rem; margin: 0; }
+    .card.highlight { border-color: #4f46e5; }
+    .card.green { border-color: #059669; }
+
+    /* ── TABLE ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2rem 0;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: #2d2d4e;
+      color: #e2e8f0;
+      padding: 0.65rem 1rem;
+      text-align: left;
+    }
+
+    td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid #2d2d4e;
+      color: #cbd5e1;
+      vertical-align: top;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #16162a; }
+
+    /* ── CODE ── */
+    .code-block {
+      background: #12121f;
+      border: 1px solid #2d2d4e;
+      border-left: 3px solid #4f46e5;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      color: #a5f3fc;
+      margin: 1rem 0;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .code-block .comment { color: #4a5568; }
+    .code-block .keyword { color: #f472b6; }
+    .code-block .string  { color: #86efac; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: #1e1b4b;
+      border-left: 4px solid #818cf8;
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin: 1.2rem 0;
+      font-size: 0.9rem;
+      color: #c7d2fe;
+    }
+
+    .callout strong { color: #a5b4fc; }
+
+    .callout.green {
+      background: #052e16;
+      border-left-color: #16a34a;
+      color: #bbf7d0;
+    }
+
+    .callout.green strong { color: #86efac; }
+
+    /* ── FLOW ── */
+    .flow { display: flex; flex-direction: column; gap: 0; margin: 1.2rem 0; }
+
+    .flow-step { display: flex; align-items: flex-start; gap: 1rem; }
+
+    .flow-line { display: flex; flex-direction: column; align-items: center; }
+
+    .flow-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #4f46e5;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .flow-connector { width: 2px; flex: 1; min-height: 20px; background: #2d2d4e; }
+    .flow-step:last-child .flow-connector { display: none; }
+
+    .flow-content { padding-bottom: 1rem; }
+    .flow-content strong { color: #e2e8f0; display: block; }
+    .flow-content span { color: #94a3b8; font-size: 0.875rem; }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-right: 0.4rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .badge-green  { background: #064e3b; color: #6ee7b7; }
+    .badge-blue   { background: #1e3a5f; color: #93c5fd; }
+    .badge-purple { background: #3b0764; color: #d8b4fe; }
+    .badge-yellow { background: #422006; color: #fde68a; }
+    .badge-red    { background: #450a0a; color: #fca5a5; }
+
+    /* ── METRIC BOX ── */
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.2rem 0;
+    }
+
+    .metric-box {
+      background: #1a1a2e;
+      border: 1px solid #2d2d4e;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .metric-box .label { font-size: 0.75rem; color: #7c7caa; margin-bottom: 0.3rem; }
+    .metric-box .value { font-size: 1.1rem; color: #a78bfa; font-weight: 700; }
+    .metric-box p { font-size: 0.8rem; margin-top: 0.3rem; }
+
+    /* ── CONFUSION MATRIX ── */
+    .confusion {
+      display: grid;
+      grid-template-columns: auto 1fr 1fr;
+      gap: 3px;
+      margin: 1.2rem 0;
+      max-width: 420px;
+      font-size: 0.85rem;
+    }
+
+    .confusion .ch { background: #2d2d4e; padding: 0.5rem 0.75rem; border-radius: 4px; text-align: center; font-weight: 600; color: #e2e8f0; }
+    .confusion .cr { background: #2d2d4e; padding: 0.5rem 0.75rem; border-radius: 4px; display: flex; align-items: center; font-weight: 600; color: #e2e8f0; }
+    .confusion .blank { background: transparent; }
+    .confusion .tp { background: #064e3b; color: #6ee7b7; padding: 0.75rem; border-radius: 4px; text-align: center; }
+    .confusion .tn { background: #064e3b; color: #6ee7b7; padding: 0.75rem; border-radius: 4px; text-align: center; }
+    .confusion .fp { background: #450a0a; color: #fca5a5; padding: 0.75rem; border-radius: 4px; text-align: center; }
+    .confusion .fn { background: #450a0a; color: #fca5a5; padding: 0.75rem; border-radius: 4px; text-align: center; }
+    .confusion .cell-label { font-size: 0.7rem; display: block; opacity: 0.8; }
+    .confusion .cell-val { font-size: 1.1rem; font-weight: 700; }
+
+    /* ── DS TABLE ── */
+    .ds-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.2rem 0;
+    }
+
+    .ds-card {
+      background: #1a1a2e;
+      border: 1px solid #2d2d4e;
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+    }
+
+    .ds-card .ds-type { font-size: 1.1rem; font-weight: 700; color: #a78bfa; margin-bottom: 0.25rem; }
+    .ds-card .ds-name { font-size: 0.9rem; color: #e2e8f0; margin-bottom: 0.6rem; }
+    .ds-card ul { padding-left: 1rem; }
+    .ds-card li { font-size: 0.8rem; color: #94a3b8; margin-bottom: 0.2rem; }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      main { margin-left: 0; padding: 1.5rem; }
+      .card-grid, .ds-grid, .metric-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<nav>
+  <div class="nav-logo">AI Roadmap Notes</div>
+
+  <div class="phase-label p1">Phase 1 — Complete</div>
+
+  <div class="nav-group-title">Python Foundations</div>
+  <a href="#variables">Variables & Datatypes</a>
+  <a href="#conditionals">Conditionals</a>
+  <a href="#loops">Loops</a>
+  <a href="#functions">Functions</a>
+  <a href="#datastructures">Data Structures</a>
+
+  <div class="nav-group-title">Python Apps</div>
+  <a href="#report-card">Student Report Card</a>
+  <a href="#expense-tracker">Expense Tracker</a>
+
+  <div class="nav-group-title">APIs</div>
+  <a href="#api-basics">Request & Response / JSON</a>
+  <a href="#fastapi">FastAPI</a>
+
+  <div class="nav-group-title">Database</div>
+  <a href="#sql-basics">SQL Basics</a>
+  <a href="#python-db">Python + PostgreSQL</a>
+
+  <div class="nav-group-title">End-to-End App</div>
+  <a href="#e2e-app">Expense Tracker API + DB</a>
+
+  <div class="phase-label p2">Phase 2 — In Progress</div>
+
+  <div class="nav-group-title">ML Categories</div>
+  <a href="#ml-overview">ML Overview</a>
+  <a href="#supervised">Supervised Learning</a>
+  <a href="#unsupervised">Unsupervised Learning</a>
+  <a href="#comparison">Comparison</a>
+
+  <div class="nav-group-title">Supervised</div>
+  <a href="#regression">Regression</a>
+  <a href="#classification">Classification</a>
+</nav>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="tag">AI Learning Roadmap</span>
+    <h1>Study Notes</h1>
+    <p>Everything covered from Python Foundations through Machine Learning — in one place.</p>
+    <div class="phase-pills">
+      <span class="phase-pill done">✓ Phase 1 — Python, APIs, Databases</span>
+      <span class="phase-pill active">→ Phase 2 — Machine Learning</span>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════
+       PHASE 1
+  ════════════════════════════════════ -->
+  <div class="phase-divider">
+    <span class="phase-badge p1">Phase 1</span>
+    <span class="phase-title">Python Foundations & APIs</span>
+    <div class="phase-line"></div>
+  </div>
+
+  <!-- ── VARIABLES ── -->
+  <section id="variables">
+    <div class="section-label">Week 1 · Python Foundations</div>
+    <h2 class="section-title">Variables & Datatypes</h2>
+    <p>A <strong>variable</strong> is a named container that stores a value. Python automatically detects the type — you don't need to declare it.</p>
+
+    <div class="code-block"><span class="comment"># Common datatypes</span>
+name    = "Manish"       <span class="comment"># str   — text</span>
+age     = 25             <span class="comment"># int   — whole number</span>
+score   = 98.5           <span class="comment"># float — decimal number</span>
+passed  = True           <span class="comment"># bool  — True or False</span></div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h4>str (String)</h4>
+        <p>Text. Wrap in quotes.<br/><code style="color:#a5f3fc">"hello"</code>, <code style="color:#a5f3fc">'world'</code></p>
+      </div>
+      <div class="card">
+        <h4>int (Integer)</h4>
+        <p>Whole numbers, no decimal.<br/><code style="color:#a5f3fc">1</code>, <code style="color:#a5f3fc">42</code>, <code style="color:#a5f3fc">-7</code></p>
+      </div>
+      <div class="card">
+        <h4>float</h4>
+        <p>Numbers with a decimal point.<br/><code style="color:#a5f3fc">3.14</code>, <code style="color:#a5f3fc">98.5</code></p>
+      </div>
+      <div class="card">
+        <h4>bool (Boolean)</h4>
+        <p>Only two values.<br/><code style="color:#a5f3fc">True</code> or <code style="color:#a5f3fc">False</code></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONDITIONALS ── -->
+  <section id="conditionals">
+    <div class="section-label">Week 1 · Python Foundations</div>
+    <h2 class="section-title">Conditional Statements</h2>
+    <p>Conditionals let the program make decisions — run different code depending on whether a condition is <strong>True</strong> or <strong>False</strong>.</p>
+
+    <div class="code-block">score = 85
+
+<span class="keyword">if</span> score >= 90:
+    print("Grade: A")
+<span class="keyword">elif</span> score >= 75:
+    print("Grade: B")
+<span class="keyword">elif</span> score >= 50:
+    print("Grade: C")
+<span class="keyword">else</span>:
+    print("Grade: Fail")</div>
+
+    <div class="callout">
+      <strong>Real use in your project:</strong> The student report card uses exactly this logic to assign grades based on average marks.
+    </div>
+  </section>
+
+  <!-- ── LOOPS ── -->
+  <section id="loops">
+    <div class="section-label">Week 1 · Python Foundations</div>
+    <h2 class="section-title">Looping Constructs</h2>
+    <p>Loops let you repeat a block of code multiple times without writing it over and over.</p>
+
+    <h3>for loop — iterate over a sequence</h3>
+    <div class="code-block">subjects = ["Maths", "Science", "English"]
+
+<span class="keyword">for</span> subject <span class="keyword">in</span> subjects:
+    print(subject)
+
+<span class="comment"># Output: Maths, Science, English</span></div>
+
+    <h3>while loop — repeat while a condition is True</h3>
+    <div class="code-block">choice = ""
+
+<span class="keyword">while</span> choice != "exit":
+    choice = input("Enter command: ")
+    print("You entered:", choice)
+
+<span class="comment"># Used in your expense tracker menu</span></div>
+  </section>
+
+  <!-- ── FUNCTIONS ── -->
+  <section id="functions">
+    <div class="section-label">Week 1 · Python Foundations</div>
+    <h2 class="section-title">Functions</h2>
+    <p>A function is a reusable block of code. Define it once, call it anywhere. Keeps code clean and avoids repetition.</p>
+
+    <div class="code-block"><span class="keyword">def</span> calculate_grade(avg):
+    <span class="keyword">if</span> avg >= 90:
+        <span class="keyword">return</span> <span class="string">"A"</span>
+    <span class="keyword">elif</span> avg >= 75:
+        <span class="keyword">return</span> <span class="string">"B"</span>
+    <span class="keyword">elif</span> avg >= 50:
+        <span class="keyword">return</span> <span class="string">"C"</span>
+    <span class="keyword">else</span>:
+        <span class="keyword">return</span> <span class="string">"Fail"</span>
+
+<span class="comment"># Call it</span>
+grade = calculate_grade(82)   <span class="comment"># → "B"</span></div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h4>def</h4>
+        <p>Keyword to define a function.</p>
+      </div>
+      <div class="card">
+        <h4>Parameters</h4>
+        <p>Inputs the function receives — <code style="color:#a5f3fc">avg</code> in the example above.</p>
+      </div>
+      <div class="card">
+        <h4>return</h4>
+        <p>Sends a value back to wherever the function was called.</p>
+      </div>
+      <div class="card">
+        <h4>Call</h4>
+        <p>Execute the function by writing its name with arguments: <code style="color:#a5f3fc">calculate_grade(82)</code></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DATA STRUCTURES ── -->
+  <section id="datastructures">
+    <div class="section-label">Week 1 · Python Foundations</div>
+    <h2 class="section-title">Data Structures</h2>
+    <p>Ways to store and organise collections of data in Python.</p>
+
+    <div class="ds-grid">
+      <div class="ds-card">
+        <div class="ds-type">[ ]</div>
+        <div class="ds-name">List</div>
+        <ul>
+          <li>Ordered</li>
+          <li>Mutable (can change)</li>
+          <li>Allows duplicates</li>
+        </ul>
+      </div>
+      <div class="ds-card">
+        <div class="ds-type">( )</div>
+        <div class="ds-name">Tuple</div>
+        <ul>
+          <li>Ordered</li>
+          <li>Immutable (cannot change)</li>
+          <li>Allows duplicates</li>
+        </ul>
+      </div>
+      <div class="ds-card">
+        <div class="ds-type">{ }</div>
+        <div class="ds-name">Dictionary</div>
+        <ul>
+          <li>Key : Value pairs</li>
+          <li>Mutable</li>
+          <li>Keys must be unique</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="code-block"><span class="comment"># List — ordered, mutable</span>
+marks = [85, 90, 78]
+marks.append(95)       <span class="comment"># add item</span>
+
+<span class="comment"># Tuple — ordered, immutable</span>
+subjects = ("Maths", "Science", "English")
+
+<span class="comment"># Dictionary — key:value</span>
+student = {
+    "name": "Manish",
+    "maths": 85,
+    "science": 90
+}
+print(student["name"])  <span class="comment"># → "Manish"</span></div>
+
+    <div class="callout">
+      <strong>Used in your projects:</strong> Expenses stored as a <em>list of dictionaries</em> — each expense is a dict <code style="color:#a5f3fc">{"category": "food", "amount": 50}</code>, and all expenses are collected in a list.
+    </div>
+  </section>
+
+  <!-- ── REPORT CARD ── -->
+  <section id="report-card">
+    <div class="section-label">Week 2 · Simple Python Apps</div>
+    <h2 class="section-title">Student Report Card Generator</h2>
+    <p>A CLI app that collects student data, calculates averages and grades, and prints formatted report cards.</p>
+
+    <h3>What it does</h3>
+    <div class="card-grid">
+      <div class="card green">
+        <h4>Input</h4>
+        <p>Student ID, name, and marks for Maths, Science, English</p>
+      </div>
+      <div class="card green">
+        <h4>Processing</h4>
+        <p>Calculates total, average, and assigns a grade using conditionals</p>
+      </div>
+      <div class="card green">
+        <h4>Storage</h4>
+        <p>Each student stored as a dictionary inside a list</p>
+      </div>
+      <div class="card green">
+        <h4>Output</h4>
+        <p>Prints a formatted report card for every student</p>
+      </div>
+    </div>
+
+    <h3>Key concepts applied</h3>
+    <div class="code-block"><span class="comment"># Student stored as a dictionary</span>
+student = {
+    "id": "S001",
+    "name": "Manish",
+    "marks": [85, 90, 78],
+    "average": 84.3,
+    "grade": "B"
+}
+
+<span class="comment"># Grade logic (function + conditionals)</span>
+<span class="keyword">def</span> calculate_grade(avg):
+    <span class="keyword">if</span> avg >= 90: <span class="keyword">return</span> <span class="string">"A"</span>
+    <span class="keyword">elif</span> avg >= 75: <span class="keyword">return</span> <span class="string">"B"</span>
+    <span class="keyword">elif</span> avg >= 50: <span class="keyword">return</span> <span class="string">"C"</span>
+    <span class="keyword">else</span>: <span class="keyword">return</span> <span class="string">"Fail"</span></div>
+  </section>
+
+  <!-- ── EXPENSE TRACKER ── -->
+  <section id="expense-tracker">
+    <div class="section-label">Week 2 · Simple Python Apps</div>
+    <h2 class="section-title">Personal Expense Tracker (CLI)</h2>
+    <p>An interactive CLI menu app to track daily expenses — add, view, filter, and summarise spending.</p>
+
+    <h3>Features built</h3>
+    <table>
+      <thead><tr><th>Feature</th><th>How it works</th></tr></thead>
+      <tbody>
+        <tr><td>Add Expense</td><td>Input category + amount → append dict to list</td></tr>
+        <tr><td>Show All</td><td>Loop through list, print each expense</td></tr>
+        <tr><td>Total Spent</td><td><code style="color:#a5f3fc">sum()</code> with a generator expression</td></tr>
+        <tr><td>Highest Expense</td><td><code style="color:#a5f3fc">max()</code> with a lambda key</td></tr>
+        <tr><td>Filter by Category</td><td>List comprehension to filter matching items</td></tr>
+        <tr><td>Group by Category</td><td>Dictionary to accumulate totals per category</td></tr>
+      </tbody>
+    </table>
+
+    <div class="code-block"><span class="comment"># Expenses: list of dictionaries</span>
+expenses = [
+    {"category": "food",   "amount": 200},
+    {"category": "travel", "amount": 150},
+    {"category": "food",   "amount": 80},
+]
+
+<span class="comment"># Highest expense</span>
+highest = max(expenses, key=<span class="keyword">lambda</span> x: x["amount"])
+
+<span class="comment"># Group by category</span>
+summary = {}
+<span class="keyword">for</span> exp <span class="keyword">in</span> expenses:
+    cat = exp["category"]
+    summary[cat] = summary.get(cat, 0) + exp["amount"]</div>
+  </section>
+
+  <!-- ── API BASICS ── -->
+  <section id="api-basics">
+    <div class="section-label">Week 4 & 5 · APIs</div>
+    <h2 class="section-title">Request & Response / JSON</h2>
+    <p>An <strong>API (Application Programming Interface)</strong> is a way for two systems to communicate. You send a <strong>Request</strong>, and the server sends back a <strong>Response</strong>.</p>
+
+    <h3>HTTP Methods</h3>
+    <table>
+      <thead><tr><th>Method</th><th>Purpose</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-green">GET</span></td><td>Retrieve data</td><td>Get all expenses</td></tr>
+        <tr><td><span class="badge badge-blue">POST</span></td><td>Create new data</td><td>Add an expense</td></tr>
+        <tr><td><span class="badge badge-yellow">PUT</span></td><td>Update existing data</td><td>Edit an expense</td></tr>
+        <tr><td><span class="badge badge-red">DELETE</span></td><td>Remove data</td><td>Delete an expense</td></tr>
+      </tbody>
+    </table>
+
+    <h3>JSON Structure</h3>
+    <p>JSON (JavaScript Object Notation) is the standard format for sending data between client and server. It looks just like a Python dictionary.</p>
+
+    <div class="code-block"><span class="comment"># JSON response from an API</span>
+{
+    "success": true,
+    "data": {
+        "id": 1,
+        "category": "food",
+        "amount": 200
+    }
+}</div>
+
+    <h3>Request & Response Flow</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content"><strong>Client sends a Request</strong><span>HTTP method + URL + optional body (for POST/PUT)</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content"><strong>Server processes it</strong><span>Reads the request, queries DB or performs logic</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content"><strong>Server returns a Response</strong><span>Status code (200 OK, 404 Not Found) + JSON body</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FASTAPI ── -->
+  <section id="fastapi">
+    <div class="section-label">Week 5 & 6 · APIs</div>
+    <h2 class="section-title">FastAPI</h2>
+    <p>FastAPI is a modern Python framework for building APIs quickly. It uses <strong>type hints</strong> to validate data automatically and generates interactive docs at <code style="color:#a5f3fc">/docs</code>.</p>
+
+    <h3>Key Concepts</h3>
+    <div class="card-grid">
+      <div class="card highlight">
+        <h4>Pydantic / BaseModel</h4>
+        <p>Defines the structure of request body data. FastAPI validates incoming data against it automatically.</p>
+      </div>
+      <div class="card highlight">
+        <h4>Path Parameters</h4>
+        <p>Part of the URL — <code style="color:#a5f3fc">/expenses/5</code><br/>Defined with <code style="color:#a5f3fc">{expense_id}</code> in the route.</p>
+      </div>
+      <div class="card highlight">
+        <h4>Query Parameters</h4>
+        <p>After the <code style="color:#a5f3fc">?</code> in the URL — <code style="color:#a5f3fc">/search?q=food</code><br/>Passed as function arguments.</p>
+      </div>
+      <div class="card highlight">
+        <h4>Request Body</h4>
+        <p>JSON data sent with POST/PUT. Mapped to a Pydantic model in the function parameter.</p>
+      </div>
+    </div>
+
+    <div class="code-block"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI
+<span class="keyword">from</span> pydantic <span class="keyword">import</span> BaseModel
+
+app = FastAPI()
+
+<span class="keyword">class</span> Expense(BaseModel):
+    category: str
+    amount: float
+
+<span class="comment"># POST /expenses — request body validated by Pydantic</span>
+@app.post(<span class="string">"/expenses"</span>)
+<span class="keyword">def</span> add_expense(expense: Expense):
+    <span class="keyword">return</span> {"success": True, "data": expense}
+
+<span class="comment"># GET /expenses/5 — path parameter</span>
+@app.get(<span class="string">"/expenses/{expense_id}"</span>)
+<span class="keyword">def</span> get_expense(expense_id: int):
+    <span class="keyword">return</span> {"id": expense_id}</div>
+
+    <div class="callout">
+      <strong>Route ordering matters:</strong> FastAPI matches routes top-down. Always define specific routes like <code>/expenses/highest</code> before dynamic ones like <code>/expenses/{id}</code>, otherwise <code>"highest"</code> gets treated as an ID.
+    </div>
+  </section>
+
+  <!-- ── SQL BASICS ── -->
+  <section id="sql-basics">
+    <div class="section-label">Week 7 & 8 · Database</div>
+    <h2 class="section-title">SQL Basics (PostgreSQL)</h2>
+    <p>SQL (Structured Query Language) is used to create, read, update, and delete data in relational databases like PostgreSQL.</p>
+
+    <h3>Core Commands</h3>
+    <div class="code-block"><span class="comment">-- Create a table</span>
+CREATE TABLE expenses (
+    id       SERIAL PRIMARY KEY,
+    category VARCHAR(100),
+    amount   NUMERIC
+);
+
+<span class="comment">-- Insert data</span>
+INSERT INTO expenses (category, amount) VALUES ('food', 200);
+
+<span class="comment">-- Select all</span>
+SELECT * FROM expenses;
+
+<span class="comment">-- Filter rows</span>
+SELECT * FROM expenses WHERE category = 'food';
+SELECT * FROM expenses WHERE amount > 100;
+
+<span class="comment">-- Update a row</span>
+UPDATE expenses SET amount = 250 WHERE id = 1;
+
+<span class="comment">-- Delete a row</span>
+DELETE FROM expenses WHERE id = 1;
+
+<span class="comment">-- Aggregate — group and sum</span>
+SELECT category, SUM(amount) FROM expenses GROUP BY category;</div>
+
+    <table>
+      <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-blue">SELECT</span></td><td>Read / retrieve data</td></tr>
+        <tr><td><span class="badge badge-green">INSERT</span></td><td>Add new rows</td></tr>
+        <tr><td><span class="badge badge-yellow">UPDATE</span></td><td>Modify existing rows</td></tr>
+        <tr><td><span class="badge badge-red">DELETE</span></td><td>Remove rows</td></tr>
+        <tr><td><span class="badge badge-purple">CREATE TABLE</span></td><td>Define a new table structure</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── PYTHON DB ── -->
+  <section id="python-db">
+    <div class="section-label">Week 7 & 8 · Database</div>
+    <h2 class="section-title">Python + PostgreSQL (psycopg2)</h2>
+    <p><strong>psycopg2</strong> is the Python library used to connect to and interact with a PostgreSQL database from code.</p>
+
+    <h3>Connection Pattern</h3>
+    <div class="code-block"><span class="keyword">import</span> psycopg2
+<span class="keyword">import</span> os
+<span class="keyword">from</span> dotenv <span class="keyword">import</span> load_dotenv
+
+load_dotenv()
+
+<span class="keyword">def</span> get_connection():
+    <span class="keyword">return</span> psycopg2.connect(
+        dbname=os.getenv(<span class="string">"DB_NAME"</span>),
+        user=os.getenv(<span class="string">"DB_USER"</span>),
+        host=os.getenv(<span class="string">"DB_HOST"</span>),
+        port=os.getenv(<span class="string">"DB_PORT"</span>)
+    )</div>
+
+    <h3>Execute a Query</h3>
+    <div class="code-block">conn   = get_connection()
+cursor = conn.cursor()
+
+<span class="comment"># Parameterised query — safe from SQL injection</span>
+cursor.execute(
+    <span class="string">"INSERT INTO expenses (category, amount) VALUES (%s, %s) RETURNING id;"</span>,
+    (expense.category, expense.amount)
+)
+
+new_id = cursor.fetchone()[0]
+conn.commit()   <span class="comment"># save the change</span>
+
+cursor.close()
+conn.close()</div>
+
+    <div class="callout">
+      <strong>Always use <code>%s</code> placeholders</strong> instead of string formatting to pass values into queries. This prevents SQL injection attacks.
+    </div>
+
+    <h3>try / finally Pattern</h3>
+    <p>Always close the connection in a <code style="color:#a5f3fc">finally</code> block so it gets cleaned up even if an error occurs.</p>
+
+    <div class="code-block"><span class="keyword">try</span>:
+    conn   = get_connection()
+    cursor = conn.cursor()
+    cursor.execute(<span class="string">"SELECT * FROM expenses;"</span>)
+    rows = cursor.fetchall()
+<span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+    <span class="keyword">return</span> {"success": False, "error": str(e)}
+<span class="keyword">finally</span>:
+    <span class="keyword">if</span> cursor: cursor.close()
+    <span class="keyword">if</span> conn:   conn.close()   <span class="comment"># always runs</span></div>
+  </section>
+
+  <!-- ── E2E APP ── -->
+  <section id="e2e-app">
+    <div class="section-label">Week 9 · End-to-End App</div>
+    <h2 class="section-title">Expense Tracker — API + Database</h2>
+    <p>
+      Combined everything from Phase 1 — FastAPI for the HTTP layer, psycopg2 for the database layer,
+      and Pydantic for request validation. Data is now stored permanently in PostgreSQL instead of in-memory.
+    </p>
+
+    <h3>APIs built</h3>
+    <table>
+      <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge badge-blue">POST</span></td><td><code>/expenses</code></td><td>Add a new expense to DB</td></tr>
+        <tr><td><span class="badge badge-green">GET</span></td><td><code>/expenses</code></td><td>Get all expenses from DB</td></tr>
+        <tr><td><span class="badge badge-green">GET</span></td><td><code>/expenses/highest</code></td><td>Get the highest expense</td></tr>
+        <tr><td><span class="badge badge-green">GET</span></td><td><code>/expenses/summary</code></td><td>Total per category</td></tr>
+        <tr><td><span class="badge badge-green">GET</span></td><td><code>/expenses/category/{cat}</code></td><td>Filter by category</td></tr>
+        <tr><td><span class="badge badge-green">GET</span></td><td><code>/expenses/category/{cat}/total</code></td><td>Total for one category</td></tr>
+        <tr><td><span class="badge badge-yellow">PUT</span></td><td><code>/expenses/{id}</code></td><td>Update an expense</td></tr>
+        <tr><td><span class="badge badge-red">DELETE</span></td><td><code>/expenses/{id}</code></td><td>Delete an expense</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Architecture</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content"><strong>Client (Postman / Browser)</strong><span>Sends HTTP requests</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content"><strong>FastAPI</strong><span>Receives request, validates body via Pydantic</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content"><strong>psycopg2</strong><span>Executes SQL query against PostgreSQL</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content"><strong>Response</strong><span>Returns JSON with success status and data</span></div>
+      </div>
+    </div>
+
+    <div class="callout green">
+      <strong>Phase 1 complete.</strong> You went from basic Python variables all the way to a fully functional REST API backed by a real database.
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════
+       PHASE 2
+  ════════════════════════════════════ -->
+  <div class="phase-divider">
+    <span class="phase-badge p2">Phase 2</span>
+    <span class="phase-title">Machine Learning</span>
+    <div class="phase-line"></div>
+  </div>
+
+  <!-- ── ML OVERVIEW ── -->
+  <section id="ml-overview">
+    <div class="section-label">Week 10–13 · Machine Learning</div>
+    <h2 class="section-title">What is Machine Learning?</h2>
+    <p>
+      Machine Learning is a way of teaching computers to learn from data — instead of writing explicit rules,
+      you show the model examples and let it figure out the patterns.
+    </p>
+    <div class="callout">
+      <strong>Analogy:</strong> Traditional programming is like giving someone a recipe. ML is like letting someone
+      taste 1000 dishes and figure out the recipe themselves.
+    </div>
+    <p>ML is broadly split into three categories based on <strong>how the model learns</strong>:</p>
+    <div class="card-grid">
+      <div class="card highlight">
+        <h4>Supervised Learning</h4>
+        <p>Learn from labeled data. You know the correct answers during training.</p>
+      </div>
+      <div class="card highlight">
+        <h4>Unsupervised Learning</h4>
+        <p>No labels. The model discovers hidden patterns and structure on its own.</p>
+      </div>
+      <div class="card">
+        <h4>Reinforcement Learning</h4>
+        <p>Learn through trial and error by receiving rewards or penalties. (Not in Phase 2)</p>
+      </div>
+      <div class="card">
+        <h4>Semi-Supervised</h4>
+        <p>Mix of labeled and unlabeled data. (Not in Phase 2)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SUPERVISED ── -->
+  <section id="supervised">
+    <div class="section-label">Category 1</div>
+    <h2 class="section-title">Supervised Learning</h2>
+    <p>
+      You <strong>teach</strong> the model using labeled data — data where you already know the correct answer.
+      The model learns the relationship between inputs and outputs, then predicts outputs for new unseen inputs.
+    </p>
+
+    <div class="callout">
+      <strong>Analogy:</strong> Like a student studying past exam papers that already have answer keys.
+      They learn from examples, then sit the real exam.
+    </div>
+
+    <h3>How it works</h3>
+    <div class="flow">
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content"><strong>Labeled Dataset</strong><span>Each data point has an input (features) AND a known output (label)</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content"><strong>Train the Model</strong><span>Model learns the mapping: input → output</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div>
+        <div class="flow-content"><strong>Predict on New Data</strong><span>Give it unseen inputs → it predicts the output</span></div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-line"><div class="flow-dot"></div></div>
+        <div class="flow-content"><strong>Evaluate</strong><span>Compare predicted vs actual to measure performance</span></div>
+      </div>
+    </div>
+
+    <h3>Two Types</h3>
+    <div class="card-grid">
+      <div class="card highlight">
+        <h4>Regression</h4>
+        <p>Predicts a <strong style="color:#6ee7b7">continuous number</strong><br/>e.g. "What score will this student get?" → <em>78.5</em></p>
+      </div>
+      <div class="card highlight">
+        <h4>Classification</h4>
+        <p>Predicts a <strong style="color:#6ee7b7">category/label</strong><br/>e.g. "Is this email spam?" → <em>Spam / Not Spam</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── UNSUPERVISED ── -->
+  <section id="unsupervised">
+    <div class="section-label">Category 2</div>
+    <h2 class="section-title">Unsupervised Learning</h2>
+    <p>No labels. No answer key. You give the model raw data and it finds hidden structure, patterns, or groupings by itself.</p>
+
+    <div class="callout">
+      <strong>Analogy:</strong> Sorting a pile of mixed fruits with no instructions —
+      you naturally group them by color, size, and shape without being told what to look for.
+    </div>
+
+    <h3>Key Type — Clustering</h3>
+    <p>Groups similar data points together into clusters. Points in the same cluster are more similar to each other than to those in other clusters.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h4>Your Project Example</h4>
+        <p><strong>Input:</strong> customer age, income, spending score<br/>
+           <strong>No labels given</strong><br/>
+           <strong>Output:</strong> Group A (high spenders), Group B (budget), Group C (casual)</p>
+      </div>
+      <div class="card">
+        <h4>Topics You'll Cover</h4>
+        <p>
+          <span class="badge badge-purple">K-Means</span>
+          <span class="badge badge-purple">Elbow Method</span>
+          <span class="badge badge-purple">Matplotlib</span>
+          <span class="badge badge-purple">Seaborn</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMPARISON ── -->
+  <section id="comparison">
+    <div class="section-label">Summary</div>
+    <h2 class="section-title">Supervised vs Unsupervised</h2>
+    <table>
+      <thead><tr><th></th><th>Supervised</th><th>Unsupervised</th></tr></thead>
+      <tbody>
+        <tr><td>Labeled data?</td><td>✅ Yes</td><td>❌ No</td></tr>
+        <tr><td>Goal</td><td>Predict a known output</td><td>Discover hidden patterns</td></tr>
+        <tr><td>Output type</td><td>Number or Category</td><td>Groups / Clusters</td></tr>
+        <tr><td>Your projects</td><td>Student Predictor, Spam Classifier</td><td>Customer Segmentation</td></tr>
+        <tr><td>Evaluation</td><td>MSE, Accuracy, Precision, Recall</td><td>Visual inspection, Elbow Method</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── REGRESSION ── -->
+  <section id="regression">
+    <div class="section-label">Supervised · Type 1</div>
+    <h2 class="section-title">Regression</h2>
+    <p>Predicts a <strong>continuous numerical value</strong>. The model learns from input-output pairs and finds the best-fitting line through the data.</p>
+
+    <h3>Example Dataset</h3>
+    <table>
+      <thead><tr><th>Hours Studied</th><th>Exam Score</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>40</td></tr>
+        <tr><td>2</td><td>50</td></tr>
+        <tr><td>3</td><td>60</td></tr>
+        <tr><td>5</td><td>75</td></tr>
+        <tr><td>8</td><td>90</td></tr>
+      </tbody>
+    </table>
+
+    <h3>The Equation — Linear Regression</h3>
+    <div class="code-block">y = mx + b
+
+y  →  predicted score (output)
+x  →  hours studied (input / feature)
+m  →  slope (how much score increases per hour)
+b  →  intercept (base score with 0 hours studied)
+
+<span class="comment"># With multiple inputs:</span>
+y = m1·x1 + m2·x2 + m3·x3 + b</div>
+
+    <h3>How the Model Learns — Cost Function (MSE)</h3>
+    <div class="code-block">MSE = average of (predicted − actual)²
+
+Example:
+  Actual score:    75
+  Predicted score: 70
+  Error:           (70 − 75)² = 25
+
+The model keeps adjusting m and b to minimise MSE.</div>
+
+    <div class="callout">
+      <strong>Key Idea:</strong> The lower the MSE, the better the model. Training = finding values of m and b that give the lowest possible MSE.
+    </div>
+
+    <h3>Train / Test Split</h3>
+    <div class="card-grid">
+      <div class="card highlight">
+        <h4>Training Data — 80%</h4>
+        <p>The model learns patterns from this data.</p>
+      </div>
+      <div class="card highlight">
+        <h4>Testing Data — 20%</h4>
+        <p>Model is evaluated on this. Never seen during training.</p>
+      </div>
+    </div>
+
+    <h3>End-to-End Flow</h3>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-content"><strong>Raw Data</strong><span>Kaggle — student scores dataset</span></div></div>
+      <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-content"><strong>Data Cleansing</strong><span>Handle missing values, fix formats, remove outliers</span></div></div>
+      <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-content"><strong>Train / Test Split</strong><span>80% training, 20% testing</span></div></div>
+      <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-content"><strong>Train the Model</strong><span>Scikit-Learn fits the line, minimises MSE</span></div></div>
+      <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-content"><strong>Test the Model</strong><span>Predict on unseen test data</span></div></div>
+      <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div></div><div class="flow-content"><strong>Evaluate</strong><span>Calculate MSE — how low is the error?</span></div></div>
+    </div>
+  </section>
+
+  <!-- ── CLASSIFICATION ── -->
+  <section id="classification">
+    <div class="section-label">Supervised · Type 2</div>
+    <h2 class="section-title">Classification</h2>
+    <p>Predicts a <strong>category/label</strong> — the output is one of a fixed set of classes. Instead of a number, the model decides <em>which group</em> something belongs to.</p>
+
+    <h3>Examples</h3>
+    <div class="card-grid">
+      <div class="card">
+        <h4>Binary Classification (2 classes)</h4>
+        <p>Email → <span class="badge badge-green">Spam</span> or <span class="badge badge-blue">Not Spam</span></p>
+      </div>
+      <div class="card">
+        <h4>Multi-Class Classification</h4>
+        <p>Review → <span class="badge badge-green">Positive</span> <span class="badge badge-blue">Neutral</span> <span class="badge badge-purple">Negative</span></p>
+      </div>
+    </div>
+
+    <h3>Text Preprocessing (for Spam Classifier)</h3>
+    <div class="flow">
+      <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-content"><strong>Clean</strong><span>Remove punctuation, lowercase everything, remove stop words</span></div></div>
+      <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div><div class="flow-connector"></div></div><div class="flow-content"><strong>Vectorize</strong><span>Convert words to numbers — count how often each word appears</span></div></div>
+      <div class="flow-step"><div class="flow-line"><div class="flow-dot"></div></div><div class="flow-content"><strong>Feed to Model</strong><span>Model works with number arrays, not raw text</span></div></div>
+    </div>
+
+    <div class="code-block">"Win a free prize"  →  [0, 1, 0, 1, 1, 0, 1, ...]
+                             ↑
+            each number = presence/frequency of a word</div>
+
+    <h3>Evaluation Metrics</h3>
+    <div class="metric-grid">
+      <div class="metric-box">
+        <div class="label">Accuracy</div>
+        <div class="value">Overall</div>
+        <p>How many total predictions were correct?</p>
+      </div>
+      <div class="metric-box">
+        <div class="label">Precision</div>
+        <div class="value">Quality</div>
+        <p>Of all predicted spam, how many were actually spam?</p>
+      </div>
+      <div class="metric-box">
+        <div class="label">Recall</div>
+        <div class="value">Coverage</div>
+        <p>Of all actual spam, how many did we catch?</p>
+      </div>
+    </div>
+
+    <div class="code-block">Accuracy  = Correct Predictions / Total Predictions
+Precision = True Positives / (True Positives + False Positives)
+Recall    = True Positives / (True Positives + False Negatives)</div>
+
+    <h3>Confusion Matrix</h3>
+    <div class="confusion">
+      <div class="blank"></div>
+      <div class="ch">Predicted: Spam</div>
+      <div class="ch">Predicted: Not Spam</div>
+      <div class="cr">Actual: Spam</div>
+      <div class="tp"><span class="cell-label">True Positive (TP)</span><span class="cell-val">90</span></div>
+      <div class="fn"><span class="cell-label">False Negative (FN)</span><span class="cell-val">10</span></div>
+      <div class="cr">Actual: Not Spam</div>
+      <div class="fp"><span class="cell-label">False Positive (FP)</span><span class="cell-val">5</span></div>
+      <div class="tn"><span class="cell-label">True Negative (TN)</span><span class="cell-val">895</span></div>
+    </div>
+
+    <div class="callout">
+      <strong>TP</strong> = correctly predicted spam &nbsp;|&nbsp;
+      <strong>TN</strong> = correctly predicted not-spam &nbsp;|&nbsp;
+      <strong>FP</strong> = predicted spam but wasn't (false alarm) &nbsp;|&nbsp;
+      <strong>FN</strong> = missed actual spam
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
